@@ -87,9 +87,15 @@ def fn_RegistrarIncidencia_lst(mensaje_str, historial_lst=[]):
     Añade una incidencia a un historial y lo devuelve.
     Si no se indica ningún historial, se empieza uno nuevo (vacío).
     """
-    #Está juntando ambas listas, hay q separar sur y norte
-    historial_lst.append(mensaje_str)
-
+    #ERROR: El problema es que estaba tomando el historial anterior sin tener en cuenta si se le pasaba una lista como
+    #parametro o no.
+    #Para solucionarlo, he creado un if-else en el que comprobar si nos han dado una lista como parametro o no.
+    #En el caso de que no nos hayan dado la lista, creamos una nueva con ese unico mensaje
+    #En el caso contrario, lo añadimos a la lista que nos pasan como parametro
+    if not historial_lst:
+        historial_lst = [mensaje_str]
+    else:
+        historial_lst.append(mensaje_str)
 
     return historial_lst
 
