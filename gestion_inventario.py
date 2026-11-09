@@ -13,12 +13,17 @@ def fn_EliminarAgotados_lst(productos_lst):
     Elimina del inventario los productos con stock 0
     y devuelve la lista de productos que quedan.
     """
-    #Solo elimina el primero?
+    #ERROR: Al borrar el producto sin inventario, todos los siguientes productos se adelantaban una posicion en la lista
+    #para que no haya un espacio nuevo. Como Monitor iba despues de raton, el for contaba que ya habia recorrido esa posicion
+    #cuando en realidad no lo habia hecho y habia recorrido la de raton, pero como raton ya no existe monitor tenia esa posicion
+    #Para solucionarlo, he creado otra lista donde guardar los productos que si tienen inventario, y es esa la que devolvemos
+    productos_inventario_lst = []
     for producto_dic in productos_lst:
         if producto_dic["stock"] == 0:
-            productos_lst.remove(producto_dic)
+            continue
+        productos_inventario_lst.append(producto_dic)
 
-    return productos_lst
+    return productos_inventario_lst
 
 
 def fn_ValorPorCategoria_dic(productos_lst):
@@ -82,7 +87,9 @@ def fn_RegistrarIncidencia_lst(mensaje_str, historial_lst=[]):
     Añade una incidencia a un historial y lo devuelve.
     Si no se indica ningún historial, se empieza uno nuevo (vacío).
     """
+    #Está juntando ambas listas, hay q separar sur y norte
     historial_lst.append(mensaje_str)
+
 
     return historial_lst
 
