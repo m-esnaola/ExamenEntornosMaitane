@@ -69,7 +69,9 @@ def fn_ProductosAReponer_lst(productos_lst):
     for producto_dic in productos_lst:
         bajo_bool = producto_dic["stock"] <= producto_dic["minimo"]
 
-        if bajo_bool or not producto_dic["pendiente"]:
+        #Error: la condicion debe ser and ya que tiene que cumplirse tanto que tenga poco stock como que no tenga un pedido
+        #pendiente por llegar
+        if bajo_bool and not producto_dic["pendiente"]:
             a_reponer_lst.append(producto_dic["nombre"])
 
     return a_reponer_lst
