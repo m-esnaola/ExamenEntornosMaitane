@@ -13,6 +13,7 @@ def fn_EliminarAgotados_lst(productos_lst):
     Elimina del inventario los productos con stock 0
     y devuelve la lista de productos que quedan.
     """
+    #Solo elimina el primero?
     for producto_dic in productos_lst:
         if producto_dic["stock"] == 0:
             productos_lst.remove(producto_dic)
@@ -30,7 +31,9 @@ def fn_ValorPorCategoria_dic(productos_lst):
     for producto_dic in productos_lst:
         categoria_str = producto_dic["categoria"]
         precio_fl = producto_dic["precio"]
-        unidades_int = producto_dic["minimo"]
+        #El programa funcionaba mal ya que se guardaba el minimo de stock que deberiamos tener, no el stock real
+        #Para eso he cambiado ["minimo"] por ["stock"]
+        unidades_int = producto_dic["stock"]
         valor_fl = precio_fl * unidades_int
 
         valores_dic[categoria_str] = valores_dic.get(categoria_str, 0) + valor_fl
